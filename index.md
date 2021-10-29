@@ -1,5 +1,5 @@
-Here you can say lots of fun things about your site.
+I will upload my study notes here. 
 
-Maybe say a some things about yourself.
+Most of them are going to be on financial machine learning-related stuff. 
 
-Or maybe what you plan to blog about.
+Any feedback or clarification on the contents here would be appreciated.
