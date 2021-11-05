@@ -6,18 +6,21 @@ The concept of Kalman filter is that extracting the true state of the observed d
 we can smooth out the time-series data.
 
 ### 2. Visual understanding
+
+![image](https://user-images.githubusercontent.com/93387709/140441237-230589bf-4950-4578-8cc7-cffdde427eca.png)
+
 The assumption here in this plot is :
 
 - Observation equation   
 
-<img src = "https://latex.codecogs.com/gif.latex?y_t&space;=&space;HX_t&space;&plus;&space;G_tv_t,&space;v_t&space;\sim&space;N(0,&space;_t)"/>
+<img src = "https://latex.codecogs.com/gif.latex?y_t&space;=&space;HX_t&space;&plus;&space;G_tv_t,&space;v_t&space;\sim&space;N(0,&space;Q_t)"/>
 
 - State equation         
 
 <img src = "https://latex.codecogs.com/gif.latex?X_t&space;=&space;FX_{t-1}&space;&plus;&space;v_t,&space;v_t&space;\sim&space;N(0,&space;T_t)"/>     
 
+### 3. The codes
 ```Python
-
 #y = pd.Series(passengers['#Passengers'].values, index=pd.to_datetime(passengers['Month']
 y = pd.Series(passengers['#Passengers'].values, index = pd.to_datetime(passengers['Month'],
                                                                        infer_datetime_format=True))
