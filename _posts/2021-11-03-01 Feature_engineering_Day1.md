@@ -6,7 +6,15 @@ The concept of Kalman filter is that extracting the true state of the observed d
 we can smooth out the time-series data.
 
 ### 2. Visual understanding
+The assumption here in this plot is :
 
+- Observation equation   
+
+<img src = "https://latex.codecogs.com/gif.latex?y_t&space;=&space;HX_t&space;&plus;&space;G_tv_t,&space;v_t&space;\sim&space;N(0,&space;_t)"/>
+
+- State equation         
+
+<img src = "https://latex.codecogs.com/gif.latex?X_t&space;=&space;FX_{t-1}&space;&plus;&space;v_t,&space;v_t&space;\sim&space;N(0,&space;T_t)"/>     
 
 ```Python
 
@@ -22,7 +30,7 @@ train_data
 test_data
 
 n_dim_obs = 1                  # 観測値の次元数
-n_dim_trend = 2                # トレンドの次元数（状態の次元数）
+n_dim_trend = 2                # トレンドの次元数（状態の次元数、何期前までの状態の情報を回帰に取り入れるのか）
 n_dim_state = n_dim_trend
 
 #FとGに関しては、n_dim_trendを起点に決定されるイメージを持つ
@@ -42,13 +50,15 @@ H = np.array([
 ], dtype=float)
 
 Q = np.eye(1) * 10
+
+#共分散はスカラ、ゆえにdot(G.T)でつじつまを合わせている。
 Q = G.dot(Q).dot(G.T)
 
 state_mean = np.zeros(n_dim_state)              # 状態の平均値ベクトルの初期値
 state_cov = np.ones((n_dim_state, n_dim_state)) # 状態の分散共分散行列の初期値
 
 #パラメータの設定ができたので状態Tretを推定して観測値tを推定する。
-#状態の平均と共分散を求めれば状態の値の分布が決まる。
+#状態の平均と共分散を求めれば状態の値の分布が決まる。（confidence intervalが求まる）
 
 kf = KalmanFilter(
     n_dim_obs=n_dim_obs,
